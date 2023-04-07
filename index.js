@@ -17,7 +17,7 @@ app.use(logger('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
-    origin: 'http://localhost:5173', // allow requests from this origin
+    origin: process.env.enturfClient, // allow requests from this origin
     credentials: true, // allow credentials to be sent with the request
 }))
 
@@ -32,6 +32,10 @@ mongoose.connect(process.env.mongodb,(err,cb)=>{
 app.use('/',userRoutes)
 app.use('/admin',adminRoutes)
 app.use('/vm',vmRoutes)
+
+app.get('/api',(req,res)=>{
+    res.send('working perfectly')
+})
 
 //serverPort
 app.listen(PORT, () => console.log(`server started on ${PORT}`));
