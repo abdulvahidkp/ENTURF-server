@@ -34,7 +34,7 @@ app.use('/admin',adminRoutes)
 app.use('/vm',vmRoutes)
 
 app.get('/api',(req,res)=>{
-    res.send('working perfectly')
+    res.send(`<h1>Enturf api started</h1>`)
 })
 
 //serverPort
