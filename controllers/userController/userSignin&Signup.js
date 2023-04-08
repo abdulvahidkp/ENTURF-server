@@ -9,14 +9,9 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%*]).{8,24}$/;
 
 module.exports = {
     mobileExist: (req, res) => {
-        const options = { 
-            // Increase the timeout value to 30 seconds
-            serverSelectionTimeoutMS: 30000,
-            socketTimeoutMS: 30000,
-          };
         if(!req.body.mobile) return res.status(400).json({ message: 'mobile - field required' })
         if (!MOBILE_REGEX.test(req.body.mobile)) return res.status(400).send({message:'Enter a valid number.'});
-        users.findOne({ mobile: req.body.mobile },null,options).then((response) => {
+        users.findOne({ mobile: req.body.mobile }).then((response) => {
             if (response) {
                 return res.status(409).json({message:'mobile number already exist'}) //user already exist
             } else {
