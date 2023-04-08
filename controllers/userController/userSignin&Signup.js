@@ -71,16 +71,6 @@ module.exports = {
                     console.log(err.message)
                     res.status(400).json({ message: 'error occured' , err:err.message })
                 })
-                // const refreshToken = jwt.sign({
-                //     id: foundUser._id,
-                // }, process.env.JWT_SECRET, 
-                //     { expiresIn: '7d' } 
-                // )
-                //saving refreshToken with current user
-                // foundUser.refreshToken = refreshToken;
-                // console.log('refreshToken'+foundUser);
-                // const result = await foundUser.save();
-                // res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: "None", maxAge: 24 * 60 * 60 * 1000 })
             }
         }
     },

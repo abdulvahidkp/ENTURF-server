@@ -17,7 +17,7 @@ app.use(logger('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
-    origin: [process.env.enturfClient,'http://192.168.0.122:5174','http://localhost:5173'], // allow requests from this origin
+    origin: process.env.enturfClient, // allow requests from this origin
     credentials: true, // allow credentials to be sent with the request
 }))
 
