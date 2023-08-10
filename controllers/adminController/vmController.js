@@ -36,8 +36,19 @@ module.exports = {
             res.status(400).json({message:'error occured'})
         })
     },
+    blockVmForFlutter: async (req,res) => {
+        const { _id } = req.body;
+        if(!_id)  return res.status(400).json({message:'_id - vm id field is required'})
+        await vms.updateOne({ _id }, [{ "$set": { "blockStatus": { "$eq": [false, "$blockStatus"] } } }]).then(response => {
+            res.sendStatus(200);
+        }).catch(err=>{
+            console.log(err.message);
+            res.status(400).json({message:'error occured'})
+        })
+    },
     changeStatus: async (req,res) => {
         const { vmId,status,reason } = req.body;
+        if(!vmId || !status) return res.status(400).json({message:'vmId,status - fields is required'})
         await vms.findOneAndUpdate({_id:vmId},{"$set":{status,reason}}).then(async (response)=>{
             sendMessage(response.mobile,reason,status)
             res.sendStatus(200);

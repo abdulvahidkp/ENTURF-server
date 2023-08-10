@@ -124,6 +124,14 @@ module.exports = {
             }
         })
     },
+    getUserDetails: async (req, res) => {
+        users.findById(req._id).then(response => {
+            res.status(200).json(response);
+        }).catch(err => {
+            console.log(err)
+            res.status(400).json({ message: 'error occured', error: err.message });
+        })
+    },
     setName: async (req,res) => {
         const {name} = req.body
         if(!name) return res.status(400).json({message:'name - field is required'});

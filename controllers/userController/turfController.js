@@ -4,6 +4,14 @@ const Razorpay = require('razorpay')
 const crypto = require('crypto')
 
 module.exports = {
+    getAllTurfs: async (req, res) => {
+        turfs.find({ approved: true, isBlocked: false, vmIsBlocked: false }).then(response => {
+            res.status(200).json(response)
+        }).catch(err => {
+            console.log(err)
+            res.status(400).json({ message: 'error occured ', error: err.message });
+        })
+    },
     getTurfs: async (req, res) => {
         const { district } = req.params;
         turfs.find({ district, approved: true, isBlocked: false, vmIsBlocked: false }).then(response => {
@@ -11,6 +19,15 @@ module.exports = {
         }).catch(err => {
             console.log(err)
             res.status(400).json({ message: 'error occured at finding turf based on district' });
+        })
+    },
+    getTurfBySport: async (req, res) => {
+        const { sport } = req.params;
+        turfs.find({ 'sportFacility.sport': sport, approved: true, isBlocked: false, vmIsBlocked: false }).then(response=>{
+            res.status(200).json(response);
+        }).catch(err => {
+            console.log(err)
+            res.status(400).json({ message: 'error occured at finding turf based on sport', error:err.message });
         })
     },
     getTurf: async (req, res) => {

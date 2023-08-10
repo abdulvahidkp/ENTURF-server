@@ -19,6 +19,8 @@ router.post('/signin/google', userController.googleSignin) //
 router.post('/vmMobile', vmController.mobileExist) //
 router.post('/vmSignup', vmController.vmSignup) //
 
+router.get('/venues',turfController.getAllTurfs) //for mobile
+router.get('/venues/:sport',turfController.getTurfBySport)  //for mobile
 router.get('/venues/:district', turfController.getTurfs) //
 router.get('/venue/:_id', turfController.getTurf) //
 
@@ -30,5 +32,6 @@ router.post('/verifyPayment',verifyToken,bookingController.verifyPayment) //
 router.get(`/booking/:bookingId/refund`,verifyToken,bookingController.refundToWallet)
 
 router.get('/bookings',verifyToken,bookingController.getBookings) //
+router.get('/profile',verifyToken,userController.getUserDetails) //for mobile
 
 module.exports = router;
